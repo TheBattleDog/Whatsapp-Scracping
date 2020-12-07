@@ -7,7 +7,7 @@ import Functions
 vChrome = webdriver.Chrome(executable_path="C:/Users/AK/Documents/Code/Whatsapp/chromedriver.exe")
 vChrome.get("https://web.whatsapp.com")
 
-time.sleep(1)
+time.sleep(10)
 
 GropName = Functions.group_nav()
 
