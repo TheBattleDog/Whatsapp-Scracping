@@ -1,6 +1,18 @@
 from datetime import date
 import math
 from datetime import datetime
+from selenium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+
+
+class BOT:
+    def __init__(self, driver_path):
+        self.vChrome = webdriver.Chrome(executable_path=driver_path)
+        self.group_name = f_group_name()
+        self.
+
 
 def DayFinder(todays_date):
     sDate = str(todays_date)
@@ -24,7 +36,7 @@ def DayFinder(todays_date):
     if day_name == 6:    return "Saturday"
 
 
-def group_nav():
+def f_group_name():
     Today = DayFinder(date.today())
     now = datetime.now()
     sub1 = now.replace(hour=9, minute=30, second=0, microsecond=0)
@@ -77,3 +89,13 @@ def group_nav():
                 return economics
             else:
                 print("Invalid Input please try again\n Valid Input = Management, EVS, Meth, IIT and ENG.")
+
+def group_nav(vChrome, GroupName):
+    SearchBox = '//*[@id="side"]/div[1]/div/label/div/div[2]'
+    vChrome.find_element_by_xpath(SearchBox).click()
+    vChrome.find_element_by_xpath(SearchBox).send_keys(GroupName)
+
+    WebDriverWait(vChrome, 20).until(EC.element_to_be_clickable((By.XPATH, f'//span[@title="{GroupName}"]')))
+    GroupElement = vChrome.find_element_by_xpath(f'//span[@title="{GroupName}"]')
+
+    GroupElement.click()
