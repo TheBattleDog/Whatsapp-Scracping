@@ -41,7 +41,8 @@ class BOT:
         time = self.vChrome.find_element_by_xpath(message_time_xpath).text
 
         #Until You find xpath of the link sleep
-        WebDriverWait(self.vChrome, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="pane-side"]/div[1]/div/div/div[1]/div/div/div/div[2]/div[1]/span/span')))
+        WebDriverWait(self.vChrome, 20).until(EC.element_to_be_clickable((
+            By.XPATH, '//*[@id="pane-side"]/div[1]/div/div/div[1]/div/div/div/div[2]/div[1]/span/span')))
 
         link_xpath = self.vChrome.find_element_by_xpath(
             '//*[@id="pane-side"]/div[1]/div/div/div[1]/div/div/div/div[2]/div[1]/span/span')
