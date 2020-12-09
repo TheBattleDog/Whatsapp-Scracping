@@ -28,45 +28,52 @@ def group_nav():
     Today = DayFinder(date.today())
     now = datetime.now()
     sub1 = now.replace(hour=9, minute=30, second=0, microsecond=0)
-
+    management = "S1 Bcom CA Carmel"
+    methodology = "S1 B Com CA(methodology )"
+    iit = "S1 B.Com CA (I I T )"
+    english = "S1 CA English"
+    economics = "Managerial Economics C A"
+    evs = "S1 B.Com C A (EVS )"
     if Today == "Monday":
         if now < sub1:
-            return "S1 Bcom CA Carmel"
+            return management
         else:
-            return "S1 B.Com C A (EVS )"
+            return evs
     elif Today == "Tuesday":
         if now < sub1:
-            return "S1 B Com CA(methodology )"
+            return methodology
         else:
-            return "S1 B. Com CA (I  I T )"
+            return iit
     elif Today == "Wednesday":
         if now < sub1:
-            return "S1 B.Com CA English"
+            return english
         else:
-            return "S1 Bcom CA Carmel"
+            return management
     elif Today == "Thursday":
         if now < sub1:
-            return "S1 B. Com CA (I  I T )"
+            return iit
         else:
-            return "Managerial Economics C A"
+            return economics
     elif Today == "Friday":
         if now < sub1:
-            return "S1 B.Com C A (EVS )"
+            return evs
         else:
-            return "S1 B.Com CA English"
+            return english
     else:
         while True:
             subject = input("Enter the subject >> ")
             subject = subject.lower()
             if subject == "management":
-                return "S1 Bcom CA Carmel"
+                return management
             if subject == "EVS":
-                return "S1 B.Com C A (EVS )"
-            if subject == "meth" or subject == "managerial economics" or subject == "economics":
-                return "Managerial Economics C A"
+                return evs
+            if subject == "meth" or subject == "methodology":
+                return methodology
             if subject == "iit":
-                return "S1 B. Com CA (I  I T )"
+                return iit
             if subject == "eng" or subject == "english":
-                return "S1 B.Com CA English"
+                return english
+            if subject == "economics" or subject == "managerial economics" or subject == "eco":
+                return economics
             else:
                 print("Invalid Input please try again\n Valid Input = Management, EVS, Meth, IIT and ENG.")
