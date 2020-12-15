@@ -3,10 +3,10 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import StaleElementReferenceException
-from selenium.common.exceptions import ElementNotInteractableException
+from selenium.common.exceptions import ElementClickInterceptedException
 import dep
 from os import system
-
+from time import sleep
 
 
 class BOT:
@@ -55,13 +55,15 @@ class BOT:
         clicked = ""
         while clicked == "":
             try:
+                sleep(1)
                 clicked = group_element.click()
-            except ElementNotInteractableException:
+            except ElementClickInterceptedException:
                 continue
 
 
     def nav_to_link(self):
         self.wait_until('//*[@id="main"]/header/div[3]/div/div[1]/div/span', 20)
+        sleep(1)
         self.vChrome.find_element_by_xpath('//*[@id="main"]/header/div[3]/div/div[1]/div/span').click()
         self.vChrome.find_element_by_xpath(self.group_search_bar).click()
         self.vChrome.find_element_by_xpath(self.group_search_bar).send_keys("https://meet.google.com/")
@@ -96,6 +98,8 @@ class BOT:
             self.clear_text_area(self.group_search_bar)
             self.vChrome.find_element_by_xpath(self.group_search_bar).send_keys("https://meet.google.com/")
             try:
+                WebDriverWait(self.vChrome, 20).until(EC.presence_of_element_located((
+                    By.XPATH, '//*[@id="pane-side"]/div[1]/div/div/div[1]/div/div/div/div[2]/div[1]/span/span')))
                 if time.hour == dep.get_current_time().hour and link_xpath.text[0:24] == "https://meet.google.com/":
                     break
                 else:
@@ -105,7 +109,7 @@ class BOT:
                     self.nav_to_group()
                     self.nav_to_link()
             except StaleElementReferenceException:
-                time.sleep(1)
+                sleep(1)
                 if time.hour == dep.get_current_time().hour and link_xpath.text[0:24] == "https://meet.google.com/":
                     break
                 else:
