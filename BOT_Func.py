@@ -11,7 +11,7 @@ from time import sleep
 
 class BOT:
     def __init__(self, driver_path):
-        self.vChrome = webdriver.Chrome(executable_path=driver_path)
+        self.vChrome = webdriver.Edge(executable_path=driver_path)
         self.group_name = "Dumb Dumb"  # "S1 Bcom CA Carmel"  # change gruop_name to self.f_group_name()
         self.link = ""
         self.group_search_bar = '//*[@id="app"]/div/div/div[2]/div[3]/span/div/div/div[1]/div/label/div/div[2]'
@@ -19,7 +19,6 @@ class BOT:
 
     def wait_until(self, xpath, time=20):
         WebDriverWait(self.vChrome, time).until(EC.element_to_be_clickable((By.XPATH, xpath)))
-
 
     def url_open(self, link):
         self.vChrome.get(link)
@@ -41,7 +40,6 @@ class BOT:
             self.group_num = 1
             self.group_name = "S1 Bcom CA Carmel"
 
-
     def nav_to_group(self):
         WebDriverWait(self.vChrome, 20).until(EC.element_to_be_clickable((
             By.XPATH, '//*[@id="side"]/div[1]/div/label/div/div[2]')))
@@ -60,7 +58,6 @@ class BOT:
             except ElementClickInterceptedException:
                 continue
 
-
     def nav_to_link(self):
         self.wait_until('//*[@id="main"]/header/div[3]/div/div[1]/div/span', 20)
         sleep(1)
@@ -68,13 +65,11 @@ class BOT:
         self.vChrome.find_element_by_xpath(self.group_search_bar).click()
         self.vChrome.find_element_by_xpath(self.group_search_bar).send_keys("https://meet.google.com/")
 
-
     def clear_text_area(self, xpath_to_clear):
         area = self.vChrome.find_element_by_xpath(xpath_to_clear)
         # Clear the Search field by pressing Ctrl + Backspace (Ctrl = u'\ue009' Backspace = u'\ue003')
         while len(area.text):
             area.send_keys(u'\ue009' + u'\ue003')
-
 
     def get_link(self):
 
@@ -92,7 +87,6 @@ class BOT:
 
             WebDriverWait(self.vChrome, 20).until(EC.element_to_be_clickable((
                 By.XPATH, '//span[@class="_1hI5g _1XH7x _1VzZY"][@dir="ltr"]')))
-
 
             self.wait_until(self.group_search_bar, 20)
             self.clear_text_area(self.group_search_bar)
@@ -121,7 +115,6 @@ class BOT:
 
         self.link = link_xpath.text
 
-
     def write_link_file(self):
         html_code = f'''<html>
 <head>
@@ -133,7 +126,6 @@ class BOT:
         file = open("link.html", "w")
         file.write(html_code)
         file.close()
-
 
     def invoke_js_file(self):
         system("start link.html")
